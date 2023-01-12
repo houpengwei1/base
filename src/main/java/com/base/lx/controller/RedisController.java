@@ -23,7 +23,7 @@ public class RedisController {
     @GetMapping("/put")
     @ResponseBody
     public void put(){
-        redisUtil.insertTime("cscs","nb",3000l);
+        redisUtil.insertTime("cscs","nb",30l);
     }
 
 }

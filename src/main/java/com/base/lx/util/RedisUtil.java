@@ -11,14 +11,14 @@ import java.util.concurrent.TimeUnit;
 public class RedisUtil {
 
     @Autowired
-    private StringRedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
 
     /**
      * 读取数据
      */
     public String getString(final String key) {
-        return redisTemplate.opsForValue().get(key);
+        return stringRedisTemplate.opsForValue().get(key);
     }
 
     /**
@@ -27,7 +27,7 @@ public class RedisUtil {
     public boolean setString(final String key, String value) {
         boolean result = false;
         try {
-            redisTemplate.opsForValue().set(key, value);
+            stringRedisTemplate.opsForValue().set(key, value);
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,7 +41,7 @@ public class RedisUtil {
     public boolean getAndSetString(final String key, String value) {
         boolean result = false;
         try {
-            redisTemplate.opsForValue().getAndSet(key, value);
+            stringRedisTemplate.opsForValue().getAndSet(key, value);
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,7 +55,7 @@ public class RedisUtil {
     public boolean delete(final String key) {
         boolean result = false;
         try {
-            redisTemplate.delete(key);
+            stringRedisTemplate.delete(key);
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class RedisUtil {
     }
 
     public void insertTime(String key,String value,long time){
-        redisTemplate.opsForValue().set(key,value,time, TimeUnit.SECONDS);
+        stringRedisTemplate.opsForValue().set(key,value,time, TimeUnit.SECONDS);
     }
 
     /**
@@ -77,10 +77,10 @@ public class RedisUtil {
     public void insertRedisObject(Object obj, String keyEnum, long timeout) {
         final String value = GsonUtil.getGsonString(obj);
         if (timeout < 0L) {
-            redisTemplate.boundValueOps(keyEnum).set(value);
+            stringRedisTemplate.boundValueOps(keyEnum).set(value);
         } else if (timeout != 0L) {
             //只有过期时间不为0才有效,为0直接跳过
-            redisTemplate.boundValueOps(keyEnum).set(value, timeout, TimeUnit.MILLISECONDS);
+            stringRedisTemplate.boundValueOps(keyEnum).set(value, timeout, TimeUnit.MILLISECONDS);
         }
     }
 
