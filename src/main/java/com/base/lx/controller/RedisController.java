@@ -1,5 +1,6 @@
 package com.base.lx.controller;
 
+import com.base.lx.thread.RedisLockThread;
 import com.base.lx.util.RedisUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ public class RedisController {
 
     @Resource
     private RedisUtil redisUtil;
+    @Resource
+    private RedisLockThread redisLockThread;
 
     @GetMapping("/get")
     public void get(){
@@ -24,6 +27,11 @@ public class RedisController {
     @ResponseBody
     public void put(){
         redisUtil.insertTime("cscs","nb",3000l);
+    }
+
+    @GetMapping("/redisLock")
+    public void redisLockThread(){
+        redisLockThread.deduct();
     }
 
 }
