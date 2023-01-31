@@ -1,6 +1,7 @@
 package com.base.lx.controller;
 
 import com.base.lx.constants.RedisConstant;
+import com.base.lx.task.RedisQueueRunner;
 import com.base.lx.util.RedisUtil;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RDelayedQueue;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @Controller
@@ -42,10 +45,19 @@ public class RedisController {
             RBlockingQueue<HashMap<String, Object>> blockingQueue = redissonClient.getBlockingQueue(RedisConstant.REDIS_DELAYED_QUEUE_NAME);
             RDelayedQueue<HashMap<String, Object>> delayedQueue = redissonClient.getDelayedQueue(blockingQueue);
             HashMap<String, Object> map = new HashMap<>();
-            map.put("cs", "nb");
+            Random random = new Random(30);
+            map.put("keys",random.nextInt());
             map.put("cs" + i, "nb" + i);
-            delayedQueue.offer(map, 3000 * i, TimeUnit.MILLISECONDS);
+            delayedQueue.offer(map, 3000, TimeUnit.MILLISECONDS);
+            System.out.println(i);
         }
+    }
+
+
+    @PostConstruct
+    public void cs(){
+        Thread thread = new Thread(new RedisQueueRunner(redissonClient));
+        thread.start();
     }
 
 }
