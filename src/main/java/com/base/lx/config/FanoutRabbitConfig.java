@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2023/3/6 16:50
  * @description
  */
+@Configuration
 public class FanoutRabbitConfig {
 
 

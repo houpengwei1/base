@@ -12,3 +12,6 @@ spring:
     password: guest
     #虚拟host 可以不设置,使用server默认host
 #    virtual-host: JCcccHost
+    publisher-confirm-type: correlated
+    #确认消息已发送到队列(Queue)
+    publisher-returns: true
