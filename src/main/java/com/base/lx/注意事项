@@ -1,0 +1,18 @@
+1、启rocketMq配置信息更改
+本地启动默认不支持开启自动创建主题topic,需要在conf里面的broker.conf增加配置信息
+
+namesrvAddr=127.0.0.1:9876
+lisenPort=10911
+brokerIP1=127.0.0.1
+
+-- 默认开启自动创建topic
+autoCreateTopicEnable=true
+
+2、rocketMq启动
+先启动 mqnamesrv.cmd   命令：start mqnamesrv.cmd
+再启动 mqbroker.cmd    命令：start mqbroker.cmd -n localhost:9876 autoCreateTopicEnable=true
+
+3、使用rocketMq延时队列
+注意:rocketMq延时队列暂时不支持指定延迟时间，只能通过默认等级设置延时时长
+延时时长对应时间：1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h
+对应等级：msg.setDelayTimeLevel(3); 代表 10s
