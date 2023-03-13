@@ -2,7 +2,7 @@
 本地启动默认不支持开启自动创建主题topic,需要在conf里面的broker.conf增加配置信息
 
 namesrvAddr=127.0.0.1:9876
-lisenPort=10911
+listenPort=10911
 brokerIP1=127.0.0.1
 
 -- 默认开启自动创建topic
