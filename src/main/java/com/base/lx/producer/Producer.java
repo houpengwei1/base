@@ -77,7 +77,7 @@ public class Producer {
             calculateLevel(second);
             return aa;
         } else {
-            for (int i = 1; i < list.size(); i++) {
+            for (int i = 0; i < list.size(); i++) {
                 if (list.get(i) < second && list.get(i + 1) > second) {
                     aa = aa + (i + 1) + ",";
                    break;
