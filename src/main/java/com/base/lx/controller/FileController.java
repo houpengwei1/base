@@ -60,6 +60,7 @@ public class FileController {
                 i = bis.read(buffer);
             }
             file.delete();
+            file1.delete();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
