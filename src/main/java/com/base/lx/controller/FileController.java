@@ -19,6 +19,7 @@ public class FileController {
 
     /**
      * 读取文件内容
+     *
      * @param localPath 生成的本地地址
      * @throws FileNotFoundException
      */
@@ -38,9 +39,9 @@ public class FileController {
      */
     public static String downloadFile() throws IOException {
         //生成远程服务器以及文件名称  固定格式TYG_PRECREDIT_20230301.txt 模拟今天是一号
-        String sftpPath = Constants.SFTP_PATH + Constants.THIRD_FILE_NAME + "20230301" + Constants.SUFFIX_TXT;
+        String sftpPath = Constants.SFTP_PATH + Constants.THIRD_FILE_NAME + Constants.UNDERLINE + "20230301" + Constants.SUFFIX_TXT;
         //下载到本地
-        String localPath = Constants.LOCAL_PATH + Constants.THIRD_FILE_NAME + "20230301" + Constants.SUFFIX_TXT;
+        String localPath = Constants.LOCAL_PATH + Constants.THIRD_FILE_NAME + Constants.UNDERLINE + "20230301" + Constants.SUFFIX_TXT;
         //模拟sftp文件路径去下载
         File file = new File(sftpPath);
         //下载到重新生成的本地路径

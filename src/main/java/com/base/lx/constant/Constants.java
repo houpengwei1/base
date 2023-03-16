@@ -18,6 +18,6 @@ public class Constants {
     public static final String SUFFIX_TXT = ".txt";
 
     //约定好第三方文件名
-    public static final String THIRD_FILE_NAME = "TYG_PRECREDIT_";
+    public static final String THIRD_FILE_NAME = "TYG_PRECREDIT";
 
 }
