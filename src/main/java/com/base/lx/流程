@@ -1,0 +1,7 @@
+1、resources/static/thirdFile 路径模拟第三方文件上传到sftp之后路径
+
+2、拉取resources/static/thirdFile下的文件  文件命名方式 第三方+"_"+文件名+yyyyMMdd形式  双方约定
+
+3、拉取后的路径放到拉取resources/static/download目录下,模拟服务器本地路径
+
+4、保存本地路径读取文件
