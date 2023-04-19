@@ -1,7 +1,8 @@
 package com.base.lx.cs;
 
-public interface TestAbstract {
+public abstract class TestAbstract {
 
-    public abstract Integer test(Integer a, Integer b);
+    public void test(Integer a, Integer b){
+    };
 
 }
