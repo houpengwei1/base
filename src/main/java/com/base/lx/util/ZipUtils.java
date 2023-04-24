@@ -36,7 +36,7 @@ public class ZipUtils {
 
         String dest = "D:\\JAVA-DEMO\\base-demo\\src\\main\\resources\\static";
 
-        String password = "1234567";
+        String password = "13246";
 
         z.unZip(data, dest, password);
     }
