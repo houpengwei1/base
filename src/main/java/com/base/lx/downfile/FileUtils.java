@@ -61,6 +61,7 @@ public class FileUtils {
         // windos
         String filePath = "D:\\ideaproject\\base\\src\\main\\resources\\666.png";
         // linux
+//        localPath+"xxx";
         //如果链接包含中文，需要转码
         String resultWordPath = URLEncoderUtils.encode("http://172.27.8.114:8888/group1/M00/00/02/rBsIcmRGTmyACO9VAACJyLSKQKo959.jpg?filename=cest.jpg");
 //        String resultWordPath = URLEncoderUtils.encode("http://172.27.8.114:8888/group1/M00/00/02/rBsIcmRGRtOACPFQAAesUHeM1LA087.png?filename=微信图片_20230327171838.png");
