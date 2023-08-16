@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.lx.mapper.TAcquiringSplitMapper">
+
+    <select id="selectByMerchantNoAndConfirmOrderNoAndConfirmTradeNo" resultType="java.util.HashMap">
+        SELECT *
+        FROM t_acquiring_split
+        WHERE MERCHANT_NO = #{merchantNo}
+          AND CONFIRM_OUT_TRADE_NO = #{confirmOutTradeNo}
+          AND CONFIRM_TRADE_NO = #{confirmTradeNo}
+    </select>
+
+</mapper>
