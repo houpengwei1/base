@@ -13,7 +13,6 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
@@ -51,7 +50,7 @@ public class TestService {
     private TAcquiringSplitMapper tAcquiringSplitMapper;
 
     public void testToSql() {
-        try (FileInputStream fis = new FileInputStream("C:\\Users\\T470\\Desktop\\0816\\T_GUARANTEE_CONFIRM_202302.xlsx");
+        try (FileInputStream fis = new FileInputStream("C:\\Users\\T470\\Desktop\\0817\\T_GUARANTEE_CONFIRM_202307.xlsx");
              XSSFWorkbook workbook = new XSSFWorkbook(fis)) {
             // 获取第一个工作表
             Iterator<Row> rowIterator = workbook.getSheetAt(0).iterator();
@@ -70,7 +69,7 @@ public class TestService {
                     ledgerAccountDO.forEach(ea -> {
                         HashMap<String, Object> map = tAcquiringSplitMapper.selectByMerchantNoAndConfirmOrderNoAndConfirmTradeNo(ea.getMerchantNo(), getCellValue(row.getCell(h)), getCellValue(row.getCell(i)));
                         if (map != null) {
-                            System.out.println("insert into T_SPLIT_REFUND (ORIGINAL_TRADE_NO,SUB_TRADE_NO, MERCHANT_NO,MERCHANT_NAME,REQUEST_DATE,AMOUNT,REFUND_AMT,CREATED_BY,CREATED_AT,UPDATED_BY," +
+                            System.out.println("insert into T_SPLIT_REFUND_"+ getCellValue(row.getCell(b)).replace("-","").substring(0,6) +" (ORIGINAL_TRADE_NO,SUB_TRADE_NO, MERCHANT_NO,MERCHANT_NAME,REQUEST_DATE,AMOUNT,REFUND_AMT,CREATED_BY,CREATED_AT,UPDATED_BY," +
                                     "UPDATED_AT,REMARK,OUT_REFUND_NO,OUT_TRADE_NO,refund_reason,ORDER_TYPE,CONFIRM_OUT_TRADE_NO,CONFIRM_TRADE_NO,CANCEL_TRADE_NO,TRADE_NO,REFUND_STATUS) VALUES(" +
                                     "'" + map.get("SUB_TRADE_NO") + "'," +
                                     "'" + atomicInteger.get() + "'," +
@@ -94,40 +93,16 @@ public class TestService {
                                     "'" + getCellValue(row.getCell(aa)) + "'," +
                                     "'" + getCellValue(row.getCell(o)) + "');");
                             atomicInteger.set(atomicInteger.get() + 1);
+                        } else {
+                            System.out.println("查询为空数据 日期："+getCellValue(row.getCell(b))+" 商户号：" + ea.getMerchantNo() + " 确认单号：" + getCellValue(row.getCell(h)) + " 确认交易号：" + getCellValue(row.getCell(i)));
                         }
                     });
                 }
-
             }
 
-            System.out.println("------------------------------------------------------------");
-            // 遍历每一行数据
-//            while (rowIterator.hasNext()) {
-//                Row row = rowIterator.next();
-//                String ab = getCellValue(row.getCell(a));
-//                if(!ab.equals("")){
-//                    List<LedgerAccountDO> ledgerAccountDO = JSONObject.parseArray(getCellValue(row.getCell(q)),LedgerAccountDO.class);
-//
-//                    ledgerAccountDO.forEach(ea->{
-//                        HashMap<String,Object> map = tAcquiringSplitMapper.selectByMerchantNoAndConfirmOrderNoAndConfirmTradeNo(ea.getMerchantNo(),getCellValue(row.getCell(h)),getCellValue(row.getCell(j)));
-//                        if(map == null){
-//                            System.out.println(ea.getMerchantNo()+":"+getCellValue(row.getCell(h))+":"+getCellValue(row.getCell(j)));
-//                        }
-//                    });
-//                }
-//
-//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * 生成关联code唯一编码
-     */
-    public static String codeCreate() {
-        UUID uuid = UUID.randomUUID();
-        return uuid.toString().replace("-", "").substring(0, 10);
     }
 
     private static String getCellValue(Cell cell) {
