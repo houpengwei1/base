@@ -69,32 +69,33 @@ public class TestService {
                     ledgerAccountDO.forEach(ea -> {
                         HashMap<String, Object> map = tAcquiringSplitMapper.selectByMerchantNoAndConfirmOrderNoAndConfirmTradeNo(ea.getMerchantNo(), getCellValue(row.getCell(h)), getCellValue(row.getCell(i)));
                         if (map != null) {
-                            System.out.println("insert into T_SPLIT_REFUND_"+ getCellValue(row.getCell(b)).replace("-","").substring(0,6) +" (ORIGINAL_TRADE_NO,SUB_TRADE_NO, MERCHANT_NO,MERCHANT_NAME,REQUEST_DATE,AMOUNT,REFUND_AMT,CREATED_BY,CREATED_AT,UPDATED_BY," +
-                                    "UPDATED_AT,REMARK,OUT_REFUND_NO,OUT_TRADE_NO,refund_reason,ORDER_TYPE,CONFIRM_OUT_TRADE_NO,CONFIRM_TRADE_NO,CANCEL_TRADE_NO,TRADE_NO,REFUND_STATUS) VALUES(" +
-                                    "'" + map.get("SUB_TRADE_NO") + "'," +
-                                    "'" + atomicInteger.get() + "'," +
-                                    "'" + ea.getMerchantNo() + "'," +
-                                    "'" + getCellValue(row.getCell(g)) + "'," +
-                                    "'" + getCellValue(row.getCell(b)) + "'," +
-                                    getCellValue(row.getCell(q)) + "," +
-                                    getCellValue(row.getCell(r)) + "," +
-                                    "'" + ea.getMerchantNo() + "'," +
-                                    "'" + getCellValue(row.getCell(w)) + "'," +
-                                    "'" + ea.getMerchantNo() + "'," +
-                                    "'" + getCellValue(row.getCell(d)) + "'," +
-                                    "'" + getCellValue(row.getCell(s)) + "'," +
-                                    "'" + getCellValue(row.getCell(k)) + "'," +
-                                    "'" + getCellValue(row.getCell(z)) + "'," +
-                                    "'" + getCellValue(row.getCell(x)) + "'," +
-                                    "'" + "DELAYED_SPLIT" + "'," +
-                                    "'" + getCellValue(row.getCell(h)) + "'," +
-                                    "'" + getCellValue(row.getCell(i)) + "'," +
-                                    "'" + getCellValue(row.getCell(l)) + "'," +
-                                    "'" + getCellValue(row.getCell(aa)) + "'," +
-                                    "'" + getCellValue(row.getCell(o)) + "');");
-                            atomicInteger.set(atomicInteger.get() + 1);
-                        } else {
-                            System.out.println("查询为空数据 日期："+getCellValue(row.getCell(b))+" 商户号：" + ea.getMerchantNo() + " 确认单号：" + getCellValue(row.getCell(h)) + " 确认交易号：" + getCellValue(row.getCell(i)));
+//                            System.out.println("insert into T_SPLIT_REFUND_"+ getCellValue(row.getCell(b)).replace("-","").substring(0,6) +" (ORIGINAL_TRADE_NO,SUB_TRADE_NO, MERCHANT_NO,MERCHANT_NAME,REQUEST_DATE,AMOUNT,REFUND_AMT,CREATED_BY,CREATED_AT,UPDATED_BY," +
+//                                    "UPDATED_AT,REMARK,OUT_REFUND_NO,OUT_TRADE_NO,refund_reason,ORDER_TYPE,CONFIRM_OUT_TRADE_NO,CONFIRM_TRADE_NO,CANCEL_TRADE_NO,TRADE_NO,REFUND_STATUS) VALUES(" +
+//                                    "'" + map.get("SUB_TRADE_NO") + "'," +
+//                                    "'" + atomicInteger.get() + "'," +
+//                                    "'" + ea.getMerchantNo() + "'," +
+//                                    "'" + getCellValue(row.getCell(g)) + "'," +
+//                                    "'" + getCellValue(row.getCell(b)) + "'," +
+//                                    getCellValue(row.getCell(q)) + "," +
+//                                    getCellValue(row.getCell(r)) + "," +
+//                                    "'" + ea.getMerchantNo() + "'," +
+//                                    "'" + getCellValue(row.getCell(w)) + "'," +
+//                                    "'" + ea.getMerchantNo() + "'," +
+//                                    "'" + getCellValue(row.getCell(d)) + "'," +
+//                                    "'" + getCellValue(row.getCell(s)) + "'," +
+//                                    "'" + getCellValue(row.getCell(k)) + "'," +
+//                                    "'" + getCellValue(row.getCell(z)) + "'," +
+//                                    "'" + getCellValue(row.getCell(x)) + "'," +
+//                                    "'" + "DELAYED_SPLIT" + "'," +
+//                                    "'" + getCellValue(row.getCell(h)) + "'," +
+//                                    "'" + getCellValue(row.getCell(i)) + "'," +
+//                                    "'" + getCellValue(row.getCell(l)) + "'," +
+//                                    "'" + getCellValue(row.getCell(aa)) + "'," +
+//                                    "'" + getCellValue(row.getCell(o)) + "');");
+//                            atomicInteger.set(atomicInteger.get() + 1);
+
+                            System.out.println("invoke com.bestpay.aggregate.acquiring.service.api.CompensateOrderService.compensateSplitRefund({" +
+                                    "\"class\":\"com.bestpay.aggregate.acquiring.service.api.request.CompensateSplitRefundRequest" + "\",\"" + "traceLogId\":\"" + 1231312 + "\",\"" + "merchantNo\":\"" + ea.getMerchantNo() + "\",\"" + "requestDate\":\"" + getCellValue(row.getCell(b)).substring(0,10) + "\",\"" + "originalTradeNo\":\"" + map.get("SUB_TRADE_NO")+"\"" + "});");
                         }
                     });
                 }
