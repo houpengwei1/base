@@ -15,6 +15,7 @@
     <description>base</description>
     <properties>
         <java.version>1.8</java.version>
+        <easy-rules.version>4.1.0</easy-rules.version>
     </properties>
     <dependencies>
         <dependency>
@@ -45,6 +46,18 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.26</version>
+        </dependency>
+
+        <!-- easy-rules -->
+        <dependency>
+            <groupId>org.jeasy</groupId>
+            <artifactId>easy-rules-core</artifactId>
+            <version>${easy-rules.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jeasy</groupId>
+            <artifactId>easy-rules-mvel</artifactId>
+            <version>${easy-rules.version}</version>
         </dependency>
 
     </dependencies>
