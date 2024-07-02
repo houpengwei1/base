@@ -43,7 +43,7 @@ public class ExcelParser {
     private static final int ac = 25;
 
     public static void main(String[] args) {
-        try (FileInputStream fis = new FileInputStream("C:\\Users\\T470\\Desktop\\0816\\T_GUARANTEE_CONFIRM_202302.xlsx");
+        try (FileInputStream fis = new FileInputStream("/Users/houpengwei/Desktop/202401040921.xlsx");
              XSSFWorkbook workbook = new XSSFWorkbook(fis)) {
             // 获取第一个工作表
             Iterator<Row> rowIterator = workbook.getSheetAt(0).iterator();
@@ -55,7 +55,8 @@ public class ExcelParser {
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
 
-                String ab = getCellValue(row.getCell(a));
+                String ab = getCellValue(row.getCell(b));
+                String ac = getCellValue(row.getCell(c));
 //                if(!a.equals("")){
 //                    String v =a.split("\\.")[0];
 //                    int b =  Integer.parseInt(v);
@@ -71,34 +72,40 @@ public class ExcelParser {
 //                    System.out.println("invoke com.bestpay.aggregate.acquiring.service.api.CreditStagesConfigService.operateCreditStagesConfig({\"class\":\"com.bestpay.aggregate.acquiring.service.api.request.CreditStagesConfigOperateRequest"+"\",\""+"traceLogId\":\""+1231312+"\",\""+"discountType\":\""+getCellValue(row.getCell(DISCOUNT_MODE_COLUMN))+"\",\""+"bankCode\":\""+getCellValue(row.getCell(BANK_CODE_COLUMN))+"\",\""+"bankName\":\""+getCellValue(row.getCell(BANK_NAME_COLUMN))+"\",\""+"configCode\":\""+codeCreate()+"\",\""+"interestRate\":\""
 //                            +getCellValue(row.getCell(INTEREST_COLUMN))+"\",\""+"instalment\":\""+getCellValue(row.getCell(INSTALLMENT_COLUMN))+"\",\""+"minAmt\":\""+getCellValue(row.getCell(MIN_AMOUNT_COLUMN))+"\",\""+"maxAmt\":\""+getCellValue(row.getCell(MAX_AMOUNT_COLUMN))+"\",\""+"createBy\":\""+"houpengwei"+"\",\""+"type\":\""+"INSERT\"})");
 //                }
-                if(!ab.equals("")){
-                    List<LedgerAccountDO> ledgerAccountDO = JSONObject.parseArray(getCellValue(row.getCell(q)),LedgerAccountDO.class);
+//                if(!ab.equals("")){
+//                    System.out.println(ab.split("_")[0]);
+//                    System.out.println(ac);
+//
+                    System.out.println("invoke com.bestpay.aggregate.acquiring.service.api.CreditStagesConfigService.operateCreditStagesConfig({\"class\":\"com.bestpay.aggregate.acquiring.service.api.request.CreditStagesConfigOperateRequest"+"\",\""+"traceLogId\":\""+1231312+"\",\""+"logoUrl\":\""+ac+"\",\""+"bankName\":\""+ab+"\",\""+"type\":\"UPDATEBYBANKCODE\"})");
 
-                    ledgerAccountDO.forEach(ea->{
-                        System.out.println("INSERT INTO telecom_config.t_acquiring_split" +
-                                "(MERCHANT_NO, MERCHANT_NAME, TRADE_NO, SUB_TRADE_NO, AMOUNT, REQUEST_DATE, REFUND_AMT, CREATED_BY, CREATED_AT, UPDATED_BY, UPDATED_AT, REMARK, FEE_AMT," +
-                                " CONFIRM_OUT_TRADE_NO, CONFIRM_TRADE_NO, ORDER_TYPE, TRADE_STATUS, OUT_TRADE_NO, CONFIRM_REQUEST_DATE) VALUES(" +
-                                "'" + getCellValue(row.getCell(g)) + "'," +
-                                "'" + getCellValue(row.getCell(h)) + "'," +
-                                "'" + getCellValue(row.getCell(aa)) + "'," +
-                                "'" + "SUB_TRADE_NO" + "'," +
-                                getCellValue(row.getCell(r)) + "," +
-                                "'" + getCellValue(row.getCell(c)) + "'," +
-                                getCellValue(row.getCell(s)) + "," +
-                                "'" + ea.getMerchantNo() + "'," +
-                                "'" + getCellValue(row.getCell(x)) + "'," +
-                                "'" + ea.getMerchantNo() + "'," +
-                                "'" + getCellValue(row.getCell(e)) + "'," +
-                                "'" + getCellValue(row.getCell(t)) + "'," +
-                                "" + "," +
-                                "'" + getCellValue(row.getCell(l)) + "'," +
-                                "'" + getCellValue(row.getCell(m)) + "'," +
-                                "'" + "DELAYED_SPLIT" + "'," +
-                                "'" + getCellValue(row.getCell(p)) + "'," +
-                                "'" + getCellValue(row.getCell(ac)) + "'," +
-                                "'" + getCellValue(row.getCell(n)) + "');");
-                    });
-                }
+
+//                    List<LedgerAccountDO> ledgerAccountDO = JSONObject.parseArray(getCellValue(row.getCell(q)),LedgerAccountDO.class);
+//
+//                    ledgerAccountDO.forEach(ea->{
+//                        System.out.println("INSERT INTO telecom_config.t_acquiring_split" +
+//                                "(MERCHANT_NO, MERCHANT_NAME, TRADE_NO, SUB_TRADE_NO, AMOUNT, REQUEST_DATE, REFUND_AMT, CREATED_BY, CREATED_AT, UPDATED_BY, UPDATED_AT, REMARK, FEE_AMT," +
+//                                " CONFIRM_OUT_TRADE_NO, CONFIRM_TRADE_NO, ORDER_TYPE, TRADE_STATUS, OUT_TRADE_NO, CONFIRM_REQUEST_DATE) VALUES(" +
+//                                "'" + getCellValue(row.getCell(g)) + "'," +
+//                                "'" + getCellValue(row.getCell(h)) + "'," +
+//                                "'" + getCellValue(row.getCell(aa)) + "'," +
+//                                "'" + "SUB_TRADE_NO" + "'," +
+//                                getCellValue(row.getCell(r)) + "," +
+//                                "'" + getCellValue(row.getCell(c)) + "'," +
+//                                getCellValue(row.getCell(s)) + "," +
+//                                "'" + ea.getMerchantNo() + "'," +
+//                                "'" + getCellValue(row.getCell(x)) + "'," +
+//                                "'" + ea.getMerchantNo() + "'," +
+//                                "'" + getCellValue(row.getCell(e)) + "'," +
+//                                "'" + getCellValue(row.getCell(t)) + "'," +
+//                                "" + "," +
+//                                "'" + getCellValue(row.getCell(l)) + "'," +
+//                                "'" + getCellValue(row.getCell(m)) + "'," +
+//                                "'" + "DELAYED_SPLIT" + "'," +
+//                                "'" + getCellValue(row.getCell(p)) + "'," +
+//                                "'" + getCellValue(row.getCell(ac)) + "'," +
+//                                "'" + getCellValue(row.getCell(n)) + "');");
+//                    });
+//                }
 
             }
         } catch (Exception e) {
